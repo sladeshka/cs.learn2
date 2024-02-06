@@ -103,17 +103,26 @@ namespace Calculator
         }
         private void button_factor_Click(object sender, EventArgs e)
         {
-            // Расчет факториала
-            if (num1 != null)
+            double? factorV = double.Parse(num1);
+            // Создать новый поток для расчета факториала
+            Thread thread = new Thread(() =>
             {
-                ulong factorial = 1;
-                for (ulong i = 1; i <= double.Parse(num1); i++)
+                // Сымитировать длительную операцию
+                Thread.Sleep(5000);
+                if (factorV != null)
                 {
-                    factorial *= i;
+                    ulong factorial = 1;
+                    for (ulong i = 1; i <= factorV; i++)
+                    {
+                        factorial *= i;
+                    }
+                    textBox1.Text = factorial.ToString();
+                    num1 = factorial.ToString();
                 }
-                textBox1.Text = factorial.ToString();
-                num1 = factorial.ToString();
-            }
+            });
+
+            // Запустить поток
+            thread.Start();
         }
         private void Button_Inverse_Click(object sender, EventArgs e)
         {
