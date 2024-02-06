@@ -2,6 +2,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Numerics;
+
 namespace Calculator
 {
     public partial class Calculator : Form
@@ -99,6 +101,20 @@ namespace Calculator
                 num1 = sqrt_3;
             }
         }
+        private void button_factor_Click(object sender, EventArgs e)
+        {
+            // Расчет факториала
+            if (num1 != null)
+            {
+                ulong factorial = 1;
+                for (ulong i = 1; i <= double.Parse(num1); i++)
+                {
+                    factorial *= i;
+                }
+                textBox1.Text = factorial.ToString();
+                num1 = factorial.ToString();
+            }
+        }
         private void Button_Inverse_Click(object sender, EventArgs e)
         {
             // Расчет обратного значения (1/x)
@@ -181,6 +197,64 @@ namespace Calculator
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void engineeringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button_Inverse.Visible = true;
+            button_Square.Visible = true;
+            button_Power.Visible = true;
+            button_Sqrt.Visible = true;
+            button_Sqrt_3.Visible = true;
+            button_factor.Visible = true;
+            button_quadratic_equation.Visible = true;
+            ClientSize = new Size(260, 380);
+            groupBox1.Size = new Size(240, 335);
+        }
+
+        private void Calculator_Load(object sender, EventArgs e)
+        {
+            groupBox1.Size = new Size(240, 243);
+            ClientSize = new Size(260, 288);
+        }
+
+        private void button_quadratic_equation_Click(object sender, EventArgs e)
+        {
+            // Создать окно диалога для ввода коэффициентов квадратного уравнения.
+            EquationDialog dialog = new EquationDialog();
+
+            // Отобразить окно диалога.
+            DialogResult result = dialog.ShowDialog();
+
+            // Если пользователь нажал кнопку "ОК", получить коэффициенты уравнения.
+            if (result == DialogResult.OK)
+            {
+                double a = dialog.A;
+                double b = dialog.B;
+                double c = dialog.C;
+
+                // Вычислить дискриминант уравнения.
+                double discriminant = b * b - 4 * a * c;
+
+                // Если дискриминант меньше нуля, уравнение не имеет действительных корней.
+                if (discriminant < 0)
+                {
+                    textBox1.Text = "Не имеет корней.";
+                }
+                // Если дискриминант равен нулю, уравнение имеет один действительный корень.
+                else if (discriminant == 0)
+                {
+                    double x = -b / (2 * a);
+                    textBox1.Text = $"Имеет один корень: x = {x}";
+                }
+                // Если дискриминант больше нуля, уравнение имеет два действительных корня.
+                else
+                {
+                    double x1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
+                    double x2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
+                    textBox1.Text = $"Имеет два корня: x1 = {x1}, x2 = {x2}";
+                }
+            }
         }
     }
 }

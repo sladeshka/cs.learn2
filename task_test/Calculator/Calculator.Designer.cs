@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
+            engineeringToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
@@ -41,6 +42,8 @@
             button_Power = new Button();
             button_Square = new Button();
             button_Sqrt_3 = new Button();
+            button_factor = new Button();
+            button_quadratic_equation = new Button();
             button_Divide = new Button();
             button_Multiply = new Button();
             button0 = new Button();
@@ -71,20 +74,27 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(262, 24);
+            menuStrip1.Size = new Size(260, 24);
             menuStrip1.TabIndex = 0;
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { engineeringToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(48, 20);
             fileToolStripMenuItem.Text = "Файл";
             // 
+            // engineeringToolStripMenuItem
+            // 
+            engineeringToolStripMenuItem.Name = "engineeringToolStripMenuItem";
+            engineeringToolStripMenuItem.Size = new Size(148, 22);
+            engineeringToolStripMenuItem.Text = "Инженерный";
+            engineeringToolStripMenuItem.Click += engineeringToolStripMenuItem_Click;
+            // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(148, 22);
             exitToolStripMenuItem.Text = "Выход";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -109,6 +119,8 @@
             groupBox1.Controls.Add(button_Power);
             groupBox1.Controls.Add(button_Square);
             groupBox1.Controls.Add(button_Sqrt_3);
+            groupBox1.Controls.Add(button_factor);
+            groupBox1.Controls.Add(button_quadratic_equation);
             groupBox1.Controls.Add(button_Divide);
             groupBox1.Controls.Add(button_Multiply);
             groupBox1.Controls.Add(button0);
@@ -130,7 +142,7 @@
             groupBox1.Controls.Add(button_C);
             groupBox1.Location = new Point(12, 33);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(241, 286);
+            groupBox1.Size = new Size(240, 331);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Калькулятор";
@@ -156,39 +168,63 @@
             // 
             // button_Sqrt
             // 
-            button_Sqrt.Location = new Point(144, 237);
+            button_Sqrt.Location = new Point(190, 237);
             button_Sqrt.Name = "button_Sqrt";
             button_Sqrt.Size = new Size(40, 40);
             button_Sqrt.TabIndex = 20;
             button_Sqrt.Text = "√";
+            button_Sqrt.Visible = false;
             button_Sqrt.Click += Button_Sqrt_Click;
             // 
             // button_Power
             // 
-            button_Power.Location = new Point(98, 237);
+            button_Power.Location = new Point(144, 237);
             button_Power.Name = "button_Power";
             button_Power.Size = new Size(40, 40);
             button_Power.TabIndex = 19;
             button_Power.Text = "x^y";
+            button_Power.Visible = false;
             button_Power.Click += Button_Click_Operation;
             // 
             // button_Square
             // 
-            button_Square.Location = new Point(52, 237);
+            button_Square.Location = new Point(144, 283);
             button_Square.Name = "button_Square";
             button_Square.Size = new Size(40, 40);
             button_Square.TabIndex = 22;
             button_Square.Text = "x^2";
+            button_Square.Visible = false;
             button_Square.Click += Button_Square_Click;
             // 
             // button_Sqrt_3
             // 
-            button_Sqrt_3.Location = new Point(190, 237);
+            button_Sqrt_3.Location = new Point(190, 283);
             button_Sqrt_3.Name = "button_Sqrt_3";
             button_Sqrt_3.Size = new Size(40, 40);
             button_Sqrt_3.TabIndex = 20;
             button_Sqrt_3.Text = "∛";
+            button_Sqrt_3.Visible = false;
             button_Sqrt_3.Click += Button_Sqrt_3_Click;
+            // 
+            // button_factor
+            // 
+            button_factor.Location = new Point(98, 283);
+            button_factor.Name = "button_factor";
+            button_factor.Size = new Size(40, 40);
+            button_factor.TabIndex = 21;
+            button_factor.Text = "n!";
+            button_factor.Visible = false;
+            button_factor.Click += button_factor_Click;
+            // 
+            // button_quadratic_equation
+            // 
+            button_quadratic_equation.Location = new Point(6, 237);
+            button_quadratic_equation.Name = "button_quadratic_equation";
+            button_quadratic_equation.Size = new Size(86, 86);
+            button_quadratic_equation.TabIndex = 21;
+            button_quadratic_equation.Text = "aх2+bx+c=0";
+            button_quadratic_equation.Visible = false;
+            button_quadratic_equation.Click += button_quadratic_equation_Click;
             // 
             // button_Divide
             // 
@@ -229,11 +265,12 @@
             // 
             // button_Inverse
             // 
-            button_Inverse.Location = new Point(6, 237);
+            button_Inverse.Location = new Point(98, 237);
             button_Inverse.Name = "button_Inverse";
             button_Inverse.Size = new Size(40, 40);
             button_Inverse.TabIndex = 21;
             button_Inverse.Text = "1/x";
+            button_Inverse.Visible = false;
             button_Inverse.Click += Button_Inverse_Click;
             // 
             // button_Backspace
@@ -297,7 +334,7 @@
             // 
             // button_Dot
             // 
-            button_Dot.Location = new Point(98, 191);
+            button_Dot.Location = new Point(6, 191);
             button_Dot.Name = "button_Dot";
             button_Dot.Size = new Size(40, 40);
             button_Dot.TabIndex = 23;
@@ -316,9 +353,9 @@
             // 
             // button_Equal
             // 
-            button_Equal.Location = new Point(190, 191);
+            button_Equal.Location = new Point(190, 145);
             button_Equal.Name = "button_Equal";
-            button_Equal.Size = new Size(40, 40);
+            button_Equal.Size = new Size(40, 86);
             button_Equal.TabIndex = 24;
             button_Equal.Text = "=";
             button_Equal.Click += Button_Equal_Click;
@@ -362,7 +399,7 @@
             // 
             // button_C
             // 
-            button_C.Location = new Point(190, 145);
+            button_C.Location = new Point(98, 191);
             button_C.Name = "button_C";
             button_C.Size = new Size(40, 40);
             button_C.TabIndex = 17;
@@ -379,7 +416,7 @@
             // Calculator
             // 
             BackColor = Color.LightSalmon;
-            ClientSize = new Size(262, 331);
+            ClientSize = new Size(260, 376);
             Controls.Add(menuStrip1);
             Controls.Add(groupBox1);
             Controls.Add(label1);
@@ -390,6 +427,7 @@
             Name = "Calculator";
             StartPosition = FormStartPosition.CenterScreen;
             TopMost = true;
+            Load += Calculator_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -429,9 +467,12 @@
         private Button button_Inverse;
         private Button button_Square;
         private Button button_Sqrt_3;
+        private Button button_factor;
+        private Button button_quadratic_equation;
         private Button button_Dot;
         private Button button_Equal;
         private Label label1;
         private ToolTip toolTip;
+        private ToolStripMenuItem engineeringToolStripMenuItem;
     }
 }
