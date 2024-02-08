@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfHello"
         mc:Ignorable="d"
-        Title="Test Window" Height="350" Width="500" MinHeight="350" MinWidth="300" Closing="Window_Closing">
+        Title="Test Window" Height="350" Width="500" MinHeight="350" MinWidth="300" Closing="Window_Closing"
+        Top="25"
+        Left="25"
+        >
     <Grid>
         <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
             <MenuItem Header="File">
@@ -17,5 +20,7 @@
         <TextBox Name="setText" TextWrapping="Wrap"  Height="30" Margin="186,58,85,246" TextChanged="setText_TextChanged"/>
         <Button Name="setBut" Content="Set Name" Height="30" Width="100" Margin="44,58,356,246" Click="setBut_Click" />
         <Button Name="retBut" Content="Ret Name" Height="30" Width="100" Margin="44,116,356,188" Click="retBut_Click" />
+        <Button Name="New_Win" Content="New Win" Height="30" Width="100" Margin="44,176,356,128" Click="New_Win_Click" />
+        <TextBox x:Name="txtBlock" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Left" Height="50" Width="75" Margin="186,176,0,0"/>
     </Grid>
 </Window>
