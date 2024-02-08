@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfHello.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfHello"
+        mc:Ignorable="d"
+        Title="Test Window" Height="350" Width="500" MinHeight="350" MinWidth="300" Closing="Window_Closing">
+    <Grid>
+        <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Click="MenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+        <Label x:Name="lbl" HorizontalAlignment="Center" VerticalAlignment="Top">Пуск</Label>
+        <Label Name="retLabel" Height="30" Width="100" Content="" Margin="186,116,214,188"/>
+        <TextBox Name="setText" TextWrapping="Wrap"  Height="30" Margin="186,58,85,246" TextChanged="setText_TextChanged"/>
+        <Button Name="setBut" Content="Set Name" Height="30" Width="100" Margin="44,58,356,246" Click="setBut_Click" />
+        <Button Name="retBut" Content="Ret Name" Height="30" Width="100" Margin="44,116,356,188" Click="retBut_Click" />
+    </Grid>
+</Window>
